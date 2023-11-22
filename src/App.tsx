@@ -16,6 +16,7 @@ interface IState {
  * It renders title, button and Graph react element.
  */
 class App extends Component<{}, IState> {
+ 
   constructor(props: {}) {
     super(props);
   
@@ -25,13 +26,19 @@ class App extends Component<{}, IState> {
     };
   }
   
+  
 
   /**
    * Render Graph react component with state.data parse as property data
    */
   renderGraph() {
-    return (<Graph data={this.state.data}/>)
+    if (this.state.showGraph) {
+      return <Graph data={this.state.data} />;
+    } else {
+      return null; // Or any placeholder when graph is hidden
+    }
   }
+  
 
   /**
    * Get new data from server and update the state with the new data
