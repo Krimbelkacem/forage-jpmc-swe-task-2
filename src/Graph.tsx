@@ -37,6 +37,9 @@ class Graph extends Component<IProps, {}> {
     });
   }
 
+
+  55
+
   componentDidMount() {
     // Get the PerspectiveViewerElement from the DOM
     const elem = document.getElementsByTagName('perspective-viewer')[0] as PerspectiveViewerElement;
