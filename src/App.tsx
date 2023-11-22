@@ -8,6 +8,7 @@ import './App.css';
  */
 interface IState {
   data: ServerRespond[],
+  showGraph: boolean;
 }
 
 /**
@@ -17,13 +18,13 @@ interface IState {
 class App extends Component<{}, IState> {
   constructor(props: {}) {
     super(props);
-
+  
     this.state = {
-      // data saves the server responds.
-      // We use this state to parse data down to the child element (Graph) as element property
       data: [],
+      showGraph: false, 
     };
   }
+  
 
   /**
    * Render Graph react component with state.data parse as property data
