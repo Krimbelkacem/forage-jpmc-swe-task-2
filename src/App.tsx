@@ -43,12 +43,24 @@ class App extends Component<{}, IState> {
   /**
    * Get new data from server and update the state with the new data
    */
+  // Method to fetch data continuously
   getDataFromServer() {
-    DataStreamer.getData((serverResponds: ServerRespond[]) => {
-      // Update the state by creating a new array of data that consists of
-      // Previous data in the state and the new data from server
-      this.setState({ data: [...this.state.data, ...serverResponds] });
-    });
+    // Start fetching data at regular intervals
+    const intervalId = setInterval(() => {
+      DataStreamer.getData((serverResponds: ServerRespond[]) => {
+        // Update state with new data
+        this.setState((prevState) => ({
+          data: [...prevState.data, ...serverResponds],
+          showGraph: true, // Set showGraph to true when data is received
+        }));
+      });
+    }, 100); // Fetch data every 100 milliseconds
+
+    // Optional: Set a guard value to stop the interval process
+    // For example, stop fetching after a specific duration (e.g., 5000ms)
+    setTimeout(() => {
+      clearInterval(intervalId); // Stop fetching after 5000ms (adjust as needed)
+    }, 5000);
   }
 
   /**
